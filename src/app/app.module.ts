@@ -8,6 +8,7 @@ import { DragonsComponent } from './_modules/dragons/dragons.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './_modules/header/header.component';
 import { FooterComponent } from './_modules/footer/footer.component';
+import { MenuComponent } from './_modules/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FooterComponent } from './_modules/footer/footer.component';
     DragonsComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
