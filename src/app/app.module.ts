@@ -10,6 +10,9 @@ import { HeaderComponent } from './_modules/header/header.component';
 import { FooterComponent } from './_modules/footer/footer.component';
 import { MenuComponent } from './_modules/menu/menu.component';
 import { DungeonRoutingModule } from './_modules/dungeon/dungeon-routing.module';
+import { DragonShoutsComponent } from './_modules/dragons/dragon-shouts/dragon-shouts.component';
+import { DragonSpecsComponent } from './_modules/dragons/dragon-specs/dragon-specs.component';
+import { DragonBirthComponent } from './_modules/dragons/dragon-birth/dragon-birth.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { DungeonRoutingModule } from './_modules/dungeon/dungeon-routing.module'
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    DragonShoutsComponent,
+    DragonSpecsComponent,
+    DragonBirthComponent
   ],
   imports: [
     BrowserModule,
