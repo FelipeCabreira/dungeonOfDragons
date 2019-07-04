@@ -1,6 +1,5 @@
 /* Default Style's */
 @media (max-width: 1024px) {
-    // if need to hide something
 	.desktop {
 		display: none;
 	}
@@ -12,9 +11,9 @@
 	align-items: center;
 }
 
-.center-column {
-    flex-direction: column;
-}
+// .center-column {
+//     flex-direction: column;
+// }
 
 .top    { align-items:     flex-start; }
 .right  { justify-content: flex-end;   }
