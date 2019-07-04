@@ -1,16 +1,9 @@
 <!-- starting page to hold footer / header / nav-side- -->
 <!-- content, header, footer, dragons, side-menu -->
 <section class="hero is-fullheight">
-  <div class="hero-head">
-    <app-header></app-header>
-  </div>
+  <app-header></app-header>
   <div class="hero-body">
-    <app-dragons></app-dragons>
-    <div class="content">
-      <!-- content router -->
-      <router-outlet></router-outlet>
-      <!-- <app-dragons></app-dragons> -->
-    </div>
+    <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
 </section>
