@@ -1,7 +1,10 @@
+// ANGULAR CORE
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+// EXTERNAL LIB
+import { CookieService } from 'ngx-cookie-service';
+// COMPONENTS
 import { AppComponent } from './app.component';
 import { DungeonComponent } from './_modules/dungeon/dungeon.component';
 import { DragonsComponent } from './_modules/dragons/dragons.component';
@@ -13,6 +16,14 @@ import { DungeonRoutingModule } from './_modules/dungeon/dungeon-routing.module'
 import { DragonShoutsComponent } from './_modules/dragons/dragon-shouts/dragon-shouts.component';
 import { DragonSpecsComponent } from './_modules/dragons/dragon-specs/dragon-specs.component';
 import { DragonBirthComponent } from './_modules/dragons/dragon-birth/dragon-birth.component';
+// REDUX
+import { environment } from 'src/environments/environment';
+import { reducers } from './_state/initial';
+import { clearState } from './_state/general/general.reducer';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { GeneralEffects } from './_state/general/general.effects';
 
 @NgModule({
   declarations: [
@@ -31,8 +42,15 @@ import { DragonBirthComponent } from './_modules/dragons/dragon-birth/dragon-bir
     BrowserModule,
     AppRoutingModule,
     DungeonRoutingModule,
+    StoreModule.forRoot(reducers, { metaReducers: [clearState] }),
+    StoreDevtoolsModule.instrument({
+      name: 'DungeonOfDragons',
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([GeneralEffects]),
   ],
-  providers: [],
+  providers: [CookieService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
