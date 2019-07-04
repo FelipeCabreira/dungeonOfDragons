@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './_modules/header/header.component';
 import { FooterComponent } from './_modules/footer/footer.component';
 import { MenuComponent } from './_modules/menu/menu.component';
+import { DragonRoutingModule } from './_modules/dragons/dragon-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MenuComponent } from './_modules/menu/menu.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DragonRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
