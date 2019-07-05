@@ -4,6 +4,7 @@ import { AuthGuard } from 'src/app/_services/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { DungeonComponent } from './dungeon.component';
 import { DragonsComponent } from '../dragons/dragons.component';
+import { DragonShoutsComponent } from '../dragons/dragon-shouts/dragon-shouts.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,13 @@ const routes: Routes = [
     children: [
       {
         path: 'dragons',
-        component: DragonsComponent
+        component: DragonsComponent,
+        children: [
+          {
+            path: 'dragon-shouts',
+            component: DragonShoutsComponent
+          }
+        ]
       }
     ]
   }

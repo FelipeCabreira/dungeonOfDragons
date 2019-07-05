@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 // EXTERNAL LIB
 import { CookieService } from 'ngx-cookie-service';
 // COMPONENTS
@@ -41,6 +42,7 @@ import { GeneralEffects } from './_state/general/general.effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     DungeonRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers: [clearState] }),
     StoreDevtoolsModule.instrument({
@@ -50,7 +52,7 @@ import { GeneralEffects } from './_state/general/general.effects';
     }),
     EffectsModule.forRoot([GeneralEffects]),
   ],
-  providers: [CookieService,],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

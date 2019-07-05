@@ -1,3 +1,3 @@
-export class TokenModel{
+export interface TokenModel{
     session: string;
 }
