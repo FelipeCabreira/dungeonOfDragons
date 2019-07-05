@@ -20,6 +20,9 @@ export class DragonShoutsComponent implements OnInit {
       dragon => {
         if(dragon !== undefined && dragon !== null){
           this.dragonSpec = dragon;
+          Object.values(this.dragonSpec);
+          console.log(this.dragonSpec);
+          
         }
       }
     );

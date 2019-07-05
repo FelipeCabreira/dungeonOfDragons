@@ -1,6 +1,43 @@
 <!-- Shouts for your dragons !! -->
-<div class="content has-background-black notification is-2">
-    <p>
-      {{ dragonSpec | json }}
-    </p>
+<!-- <div class="content has-background-black notification is-2">
+  <p>
+    {{ dragonSpec | json }}
+  </p>
+</div> -->
+<!-- <section class="section"> -->
+<div class="container" *ngIf="dragonSpec">
+  <div class="columns ">
+      <!-- is-centered -->
+    <div class="column ">
+      <!--  -->
+      <table class="table is-responsive is-hoverable is-striped is-bordered">
+        <!-- *ngIf="dataDragon.lenght > 0"  [dataColumns]="cols" [value]="dataDragon" -->
+        <thead>
+          <tr>
+            <th *ngFor="let col of dragonSpec">
+              {{ col.name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let col of dragonSpec">
+              {{ col.id}}
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let col of dragonSpec">
+              {{ col.type}}
+            </td>
+          </tr>
+          <tr>
+            <td *ngFor="let col of dragonSpec">
+              {{ col.createdAt}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+<!-- </section> -->

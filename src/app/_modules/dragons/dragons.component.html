@@ -1,40 +1,12 @@
 <!-- Manager of table with dragons ( crud page ) -->
-<!-- <div class="hero-body"> -->
 <div class="is-overlay has-text-centered single-spaced" style="top: 82px;">
-  <h1 class="title is-2 has-text-light">Welcome Dragons</h1>
+  <h1 class="title is-1 has-text-light">Welcome Dragons</h1>
+</div>
+<div class="table-container">
+  <router-outlet></router-outlet>
 </div>
 
-<router-outlet></router-outlet>
-
-<button class="button" (click)="shoutForDragons()">Dragons</button>
+<!-- <button class="button" (click)="shoutForDragons()">Dragons</button>
 <button class="button" (click)="back()">Back</button>
-<button class="button" (click)="shout()">SHOUT !!</button>
-
-
+<button class="button" (click)="shout()">SHOUT !!</button> -->
 <!-- </div> -->
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-narrow">
-        <table class="table is-responsive is-hoverable is-striped is-bordered" 
-          >
-          <!-- *ngIf="dataDragon.lenght > 0"  [dataColumns]="cols" [value]="dataDragon" -->
-          <thead>
-            <tr>
-              <!-- <th *ngFor="let col of columns">
-                {{col.value}}
-              </th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <!-- <td *ngFor="let col of columns">
-
-              </td> -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
