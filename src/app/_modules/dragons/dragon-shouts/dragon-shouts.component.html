@@ -7,7 +7,7 @@
 <!-- <section class="section"> -->
 <div class="container" *ngIf="dragonSpec">
   <div class="columns ">
-      <!-- is-centered -->
+    <!-- is-centered -->
     <div class="column ">
       <!--  -->
       <table class="table is-responsive is-hoverable is-striped is-bordered">
@@ -15,11 +15,16 @@
         <thead>
           <tr>
             <th *ngFor="let col of dragonSpec">
-              {{ col.name }}
+              NAME
             </th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <th *ngFor="let col of dragonSpec">
+              {{ col.name }}
+            </th>
+          </tr>
           <tr>
             <td *ngFor="let col of dragonSpec">
               {{ col.id}}

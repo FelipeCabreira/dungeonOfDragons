@@ -11,18 +11,22 @@ import { DragonModel } from 'src/app/_models/dragon.model';
   styleUrls: ['./dragon-shouts.component.scss']
 })
 export class DragonShoutsComponent implements OnInit {
-  // public receiveData: DragonModel;
-  public dragonSpec: any;
-  constructor(private _store: Store<AppState>) {}
+  public dragonSpec: DragonModel;
+  public column = [{
+    field: 'name',
+    header: ''
+  }];
+
+
+  constructor(private _store: Store<AppState>) { }
 
   ngOnInit() {
     this._store.select(selectDragonsList).subscribe(
       dragon => {
-        if(dragon !== undefined && dragon !== null){
+        if (dragon !== undefined && dragon !== null) {
           this.dragonSpec = dragon;
           Object.values(this.dragonSpec);
           console.log(this.dragonSpec);
-          
         }
       }
     );
