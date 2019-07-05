@@ -39,6 +39,32 @@ export class ApiService {
     return response;
   }
 
+  put(url: string, body: DragonModel, id?: any): Observable<any> {
+    const response = this._http.put(url, body, { headers: this.getHeaders(), observe: 'response' })
+      .pipe(
+        catchError(
+          error => {
+            this.exceptionHandler(error, url);
+            return new Observable<any>();
+          }
+        )
+      );
+    return response;
+  }
+
+  delete(url: string): Observable<any> {
+    const response = this._http.delete(url, { headers: this.getHeaders(), observe: 'response' })
+      .pipe(
+        catchError(
+          error => {
+            this.exceptionHandler(error, url);
+            return new Observable<any>();
+          }
+        )
+      );
+    return response;
+  }
+
   getHeaders(): HttpHeaders {
     // const monitor = this._cookies.get('monitor');
     let session: string;

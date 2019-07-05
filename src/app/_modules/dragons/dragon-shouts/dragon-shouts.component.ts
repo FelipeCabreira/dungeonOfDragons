@@ -12,19 +12,17 @@ import { DragonModel } from 'src/app/_models/dragon.model';
 })
 export class DragonShoutsComponent implements OnInit {
   // public receiveData: DragonModel;
-  public receiveData: any;
+  public dragonSpec: any;
   constructor(private _store: Store<AppState>) {}
 
   ngOnInit() {
     this._store.select(selectDragonsList).subscribe(
       dragon => {
         if(dragon !== undefined && dragon !== null){
-          console.log(dragon);
-          this.receiveData = dragon;
+          this.dragonSpec = dragon;
         }
       }
     );
-    console.log(typeof this.receiveData)
   }
 
 }
