@@ -7,13 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./dungeon.component.scss']
 })
 export class DungeonComponent implements OnInit {
-
+  public atDungeon: boolean;
   constructor(private _route: Router) { }
 
   ngOnInit() {
+    this.atDungeon = true;
   }
 
-  dragons(){
+  callDragons(){
+    this.atDungeon = false;
     this._route.navigate(['/dungeon/dragons']);
   }
 }
