@@ -6,6 +6,8 @@ export enum GeneralActionTypes {
     GeneralInitialState = '[General] General Initial State',
     // Control loading between pages
     ChangeLoading = '[General] Change Loading',
+    // Dungeon fun
+    LocateDungeon = '[General] Locate dungeon',
     // Check token activities
     LoginTokenState = '[General] Login Token State',
     //  Actual login 
@@ -43,6 +45,12 @@ export class GeneralInitialState implements Action {
 
 export class ChangeLoading implements Action {
     readonly type = GeneralActionTypes.ChangeLoading;
+
+    constructor(public payload: boolean) {
+    }
+}
+export class LocateDungeon implements Action {
+    readonly type = GeneralActionTypes.LocateDungeon;
 
     constructor(public payload: boolean) {
     }
@@ -165,6 +173,7 @@ export class ClearSession implements Action {
 export type GeneralActions =
     GeneralInitialState
     | ChangeLoading
+    | LocateDungeon
     | LoginTokenState
     | LoginState
     | LoginStateSuccess

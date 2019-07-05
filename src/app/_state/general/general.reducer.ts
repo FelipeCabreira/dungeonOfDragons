@@ -7,8 +7,8 @@ import { DragonModel } from 'src/app/_models/dragon.model';
 export interface GeneralState {
     loading: number;
     token: TokenModel;
-    // dragon: DragonModel;
-    dragon: any;
+    dragon: DragonModel;
+    dungeon: boolean;
 }
 
 // valores iniciais para cada uma das actions
@@ -16,6 +16,7 @@ export const initialState: GeneralState = {
     loading: 0,
     token: null,
     dragon: null,
+    dungeon: false,
 };
 
 export function generalReducer(state: GeneralState = initialState, action: GeneralActions): GeneralState {
@@ -52,10 +53,11 @@ export function generalReducer(state: GeneralState = initialState, action: Gener
                 ...state,
                 token: action.payload,
             };
-
-
-
-
+        case GeneralActionTypes.LocateDungeon:
+            return {
+                ...state,
+                dungeon: action.payload,
+            }
         case GeneralActionTypes.DragonList:
             return {
                 ...state,
@@ -110,7 +112,7 @@ export function generalReducer(state: GeneralState = initialState, action: Gener
 
 
 
-            
+
         case GeneralActionTypes.LogoutState:
             return {
                 ...state,
