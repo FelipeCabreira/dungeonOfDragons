@@ -66,18 +66,9 @@ export class ApiService {
   }
 
   getHeaders(): HttpHeaders {
-    // const monitor = this._cookies.get('monitor');
-    let session: string;
-
-    // Define session values if not get session from cookies !
-    // if (dssession !== undefined && dssession !== null && dssession !== '')
-    // 	session = dssession;
-    // else session = this._cookies.get('dssession');
-
     return new HttpHeaders()
       .set('Content-Type', 'application/json; charset=utf-8')
-      .set('Access-Control-Allow-Origin', '*')
-    // .set('Pragma', 'dssession=' + session);
+      .set('Access-Control-Allow-Origin', '*');
   }
 
   exceptionHandler<T>(errorOperation = 'operation', url: string) {
@@ -85,8 +76,7 @@ export class ApiService {
       let message = `error in ${errorOperation}() retrieving ${url}`;
       console.log(`${message}:`, err)
       if (err instanceof HttpErrorResponse) {
-        // you could extract more info about the error if you want, e.g.:
-        console.log(`status: ${err.status}, ${err.statusText}`);
+        // console.log(`status: ${err.status}, ${err.statusText}`);
         switch (err.status) {
           case 500:
             console.debug('teste error 500');
