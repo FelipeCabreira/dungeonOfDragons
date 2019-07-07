@@ -5,6 +5,7 @@ import { DragonList } from 'src/app/_state/general/general.actions';
 import { selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 import { DragonTableModel } from 'src/app/_models/dragon-table.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dragon-shouts',
@@ -19,7 +20,10 @@ export class DragonShoutsComponent implements OnInit {
   }];
 
 
-  constructor(private _store: Store<AppState>) { }
+  constructor(
+    private _store: Store<AppState>,
+    private _route: Router,
+    ) { }
 
 
 
@@ -28,9 +32,22 @@ export class DragonShoutsComponent implements OnInit {
       dragon => {
         if (dragon !== undefined && dragon !== null) {
           this.dragonSpec = dragon;
+          console.log(this.dragonSpec);
         }
       }
     );
+  }
+
+
+  changeInfoDragon(dragonSpec) {
+    console.log(dragonSpec.id);
+    alert('test');
+  }
+  
+  
+  killDragon(dragonSpec) {
+    console.log(dragonSpec.id);
+    alert('delete');
   }
 
 }

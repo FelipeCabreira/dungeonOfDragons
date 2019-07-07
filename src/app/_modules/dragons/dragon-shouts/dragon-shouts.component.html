@@ -16,25 +16,21 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
-            <td *ngFor="let infoDragon of columns">
-              <!-- (click)="" -->
-              <!-- details(rowData) -->
+            <td *ngFor="let infoDragon of columns" >
               {{rowData[infoDragon.field]}}
             </td>
             <td>
-              <!-- <button color="primary"> -->
-              <!-- (click)="edit(rowData)" -->
-              <!-- <mat-icon>edit</mat-icon> -->
-              <button class="button is-info is-small is-hovered"><i class="fas fa-edit"></i></button>
+              <button class="button is-info is-small is-hovered" (click)="changeInfoDragon(rowData)">
+                <i class="fas fa-edit"></i>
+              </button>
             </td>
             <td>
-              <!-- <button color="warn"> -->
-              <!-- (click)="delete(rowData)" -->
-              <button class="button is-info is-small is-hovered"><i class="fas fa-trash"></i></button>
+              <button class="button is-info is-small is-hovered" (click)="killDragon(rowData)">
+                <i class="fas fa-trash"></i>
+              </button>
             </td>
           </tr>
         </ng-template>
-
       </p-table>
     </div>
   </div>
