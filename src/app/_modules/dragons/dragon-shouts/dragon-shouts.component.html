@@ -1,43 +1,41 @@
 <!-- Shouts for your dragons !! -->
-<!-- <section class="section"> -->
 <div class="container" *ngIf="dragonSpec">
   <div class="columns ">
     <!-- is-centered -->
     <div class="column ">
-      <!--  -->
-      <table class="table is-responsive is-hoverable is-striped is-bordered">
-        <!-- *ngIf="dataDragon.lenght > 0"  [dataColumns]="cols" [value]="dataDragon" -->
-        <thead>
+      <p-table [columns]="cols" [value]="dragonSpec" *ngIf="dragonSpec.length > 0">
+        <!-- selectionMode="single" sortField="name" sortOrder="1" -->
+        <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of dragonSpec">
-              NAME
+            <th *ngFor="let infoDragon of columns" [pSortableColumn]="infoDragon.field">
+              {{infoDragon.header}}
             </th>
+            <th class="table-buttons"></th>
+            <th class="table-buttons"></th>
           </tr>
-        </thead>
-        <tbody>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
-            <th *ngFor="let col of dragonSpec">
-              {{ col.name }}
-            </th>
-          </tr>
-          <tr>
-            <td *ngFor="let col of dragonSpec">
-              {{ col.id}}
+            <td *ngFor="let infoDragon of columns">
+              <!-- (click)="" -->
+              <!-- details(rowData) -->
+              {{rowData[infoDragon.field]}}
+            </td>
+            <td>
+              <!-- <button color="primary"> -->
+              <!-- (click)="edit(rowData)" -->
+              <!-- <mat-icon>edit</mat-icon> -->
+              <button class="button is-info is-small is-hovered"><i class="fas fa-edit"></i></button>
+            </td>
+            <td>
+              <!-- <button color="warn"> -->
+              <!-- (click)="delete(rowData)" -->
+              <button class="button is-info is-small is-hovered"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
-          <tr>
-            <td *ngFor="let col of dragonSpec">
-              {{ col.type}}
-            </td>
-          </tr>
-          <tr>
-            <td *ngFor="let col of dragonSpec">
-              {{ col.createdAt}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </ng-template>
+
+      </p-table>
     </div>
   </div>
 </div>
-<!-- </section> -->

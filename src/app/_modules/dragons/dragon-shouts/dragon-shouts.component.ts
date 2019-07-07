@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { DragonList } from 'src/app/_state/general/general.actions';
 import { selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
+import { DragonTableModel } from 'src/app/_models/dragon-table.model';
 
 @Component({
   selector: 'app-dragon-shouts',
@@ -12,21 +13,21 @@ import { DragonModel } from 'src/app/_models/dragon.model';
 })
 export class DragonShoutsComponent implements OnInit {
   public dragonSpec: DragonModel;
-  public column = [{
+  public cols: DragonTableModel[] = [{
     field: 'name',
-    header: ''
+    header: 'Dragon Name'
   }];
 
 
   constructor(private _store: Store<AppState>) { }
+
+
 
   ngOnInit() {
     this._store.select(selectDragonsList).subscribe(
       dragon => {
         if (dragon !== undefined && dragon !== null) {
           this.dragonSpec = dragon;
-          Object.values(this.dragonSpec);
-          console.log(this.dragonSpec);
         }
       }
     );
