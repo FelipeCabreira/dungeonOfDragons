@@ -19,6 +19,7 @@ export class DragonShoutsComponent implements OnInit {
     field: 'name',
     header: 'Dragon Name'
   }];
+  public visible: boolean = true;
 
 
   constructor(
@@ -52,16 +53,34 @@ export class DragonShoutsComponent implements OnInit {
 
   killDragon(dragonSpec) {
     // dispatch action to remove
-    if (dragonSpec !== undefined && dragonSpec !== null) {
-      this.notifier('KILL WITH FIRE !, Wait...', 'is-success', 'right');
+    if (dragonSpec !== undefined && dragonSpec !== null && dragonSpec.id !== undefined && dragonSpec.id !== null) {
+      this.notifier('KILLED WITH FIRE ! Wait...', 'is-success', 'right');
       this._store.dispatch(new DragonDelete(dragonSpec.id));
       this._store.dispatch(new DragonList());
+      // this.updateVisibility(dragonSpec);
+
     } else {
-      this.notifier('Ops, Something went wrong !, Wait...', 'is-danger', 'right');
+      this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
       this._store.dispatch(new DragonList());
       return;
     }
   }
+
+
+  // updateVisibility(dragonSpec): void {
+  //   this.visible = false;
+  //   setTimeout(() => {
+  //     let dragonUpdate: DragonModel = {
+  //       id: this.dragonSpec.id,
+  //       createdAt: this.dragonSpec.createdAt,
+  //       name: this.dragonSpec.name,
+  //       type: this.dragonSpec.type,
+  //       histories: this.dragonSpec.histories,
+  //     };
+  //     dragonSpec = dragonUpdate;
+  //     this.visible = true;
+  //   }, 200);
+  // }
 
   notifier(msg, type, position) {
     bulmaToast.toast({
