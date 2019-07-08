@@ -30,11 +30,12 @@ export class DragonShoutsComponent implements OnInit {
 
   ngOnInit() {
     // getting info from redux
+    this._store.dispatch(new DragonList());
     this._store.select(selectDragonsList).subscribe(
       dragon => {
         if (dragon !== undefined && dragon !== null) {
           this.dragonSpec = dragon;
-          console.log(this.dragonSpec);
+          // console.log(this.dragonSpec);
         }
       }
     );
@@ -45,8 +46,6 @@ export class DragonShoutsComponent implements OnInit {
   }
 
   changeInfoDragon(dragonSpec) {
-    // dispatch action to edit
-    console.log(dragonSpec.id);
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 
