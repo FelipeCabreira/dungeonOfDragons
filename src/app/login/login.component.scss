@@ -34,7 +34,7 @@ $grey-lighter: hsl(0, 0%, 86%);
       padding: 3rem 2.5rem 5rem;
     }
 
-    #email,
+    #user,
     #password {
       display: block;
       width: 100%;
@@ -52,15 +52,6 @@ $grey-lighter: hsl(0, 0%, 86%);
       &:active,
       &:focus {
         border-color: $primary;
-      }
-    }
-
-    .checkbox {
-      color: $grey-light;
-      font-size: 0.8rem;
-
-      span {
-        margin-left: 0.5rem;
       }
     }
 
@@ -103,8 +94,6 @@ label {
 }
 
 input:focus,
-select:focus,
-textarea:focus,
 button:focus {
   outline: none;
 }
