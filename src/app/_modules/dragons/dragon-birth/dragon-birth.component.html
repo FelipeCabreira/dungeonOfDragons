@@ -1,12 +1,37 @@
 <!-- The birth ( creating ) of a Dovah ! ( known as dragons ) -->
 <div class="container">
-  <!-- <form [formGroup]="birthForm" (ngSubmit)="getForm()"> -->
+  <form [formGroup]="birthForm" (ngSubmit)="getForm()">
     <div class="card">
       <header class="card-header">
-        <p class="card-header-title">
-            Teach him well !
-        </p>
+        <div *ngIf="update">
+          <p class="card-header-title">
+            Update Information of Dragon
+          </p>
+        </div>
+        <div *ngIf="!update">
+          <p class="card-header-title">
+            Create dragon
+          </p>
+        </div>
+        <a class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
       </header>
+      <div class="card-content">
+        <div class="content">
+          <!-- content here -->
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a (click)="saveDragon()" class=" card-footer-item">Save</a>
+        <a (click)="updateDragon()" class=" card-footer-item">Edit</a>
+        <a (click)="deleteDragon()" class="card-footer-item">Delete</a>
+      </footer>
     </div>
-  <!-- </form> -->
+    <div class="hero">
+      <button class="button is-info is-medium is-hoverable" (click)="returnToDungeon()"> Back </button>
+    </div>
+  </form>
 </div>
