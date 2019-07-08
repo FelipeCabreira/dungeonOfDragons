@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 // EXTERNAL LIB
 import { CookieService } from 'ngx-cookie-service';
 import { TableModule } from 'primeng/table';
@@ -44,6 +45,7 @@ import { GeneralEffects } from './_state/general/general.effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TableModule,
     DungeonRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers: [clearState] }),

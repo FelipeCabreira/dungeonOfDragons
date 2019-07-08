@@ -23,19 +23,19 @@ export class DragonsComponent implements OnInit {
     this._route.navigate(['/dungeon/dragons/dragon-shouts']);
   }
 
-  back() {
-    this._route.navigate(['/dungeon']);
-  }
+  // back() {
+  //   this._route.navigate(['/dungeon']);
+  // }
 
-  shout() {
-    bulmaToast.toast({
-      message: "FUUUS RO DAAAAH !!!!",
-      type: "is-success",
-      position: "top-right",
-      closeOnClick: true,
-    });
-    const id = 58;
-    this._store.dispatch(new DragonState(id));
-  }
+  // shout() {
+  //   bulmaToast.toast({
+  //     message: "FUUUS RO DAAAAH !!!!",
+  //     type: "is-success",
+  //     position: "top-right",
+  //     closeOnClick: true,
+  //   });
+  //   const id = 58;
+  //   this._store.dispatch(new DragonState(id));
+  // }
 
 }

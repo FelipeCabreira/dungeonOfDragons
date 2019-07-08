@@ -28,6 +28,7 @@ export class DragonShoutsComponent implements OnInit {
 
 
   ngOnInit() {
+    // getting info from redux
     this._store.select(selectDragonsList).subscribe(
       dragon => {
         if (dragon !== undefined && dragon !== null) {
@@ -38,16 +39,21 @@ export class DragonShoutsComponent implements OnInit {
     );
   }
 
-
+  newDragon(){
+    this._route.navigate(['/dungeon/dragons/dragon-birth']);
+  }
+  
   changeInfoDragon(dragonSpec) {
+    // dispatch action to edit
     console.log(dragonSpec.id);
-    alert('test');
+    this._route.navigate(['/dungeon/dragons/dragon-birth']);
   }
   
   
   killDragon(dragonSpec) {
+    // dispatch action to remove
     console.log(dragonSpec.id);
-    alert('delete');
+    alert('KILL WITH FIRE... oh wait...')
   }
 
 }

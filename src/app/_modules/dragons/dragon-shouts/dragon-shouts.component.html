@@ -1,8 +1,8 @@
 <!-- Shouts for your dragons !! -->
 <div class="container" *ngIf="dragonSpec">
-  <div class="columns ">
+  <div class="columns">
     <!-- is-centered -->
-    <div class="column ">
+    <div class="column">
       <p-table [columns]="cols" [value]="dragonSpec" *ngIf="dragonSpec.length > 0">
         <!-- selectionMode="single" sortField="name" sortOrder="1" -->
         <ng-template pTemplate="header" let-columns>
@@ -16,22 +16,27 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
-            <td *ngFor="let infoDragon of columns" >
+            <td *ngFor="let infoDragon of columns">
               {{rowData[infoDragon.field]}}
             </td>
             <td>
-              <button class="button is-info is-small is-hovered" (click)="changeInfoDragon(rowData)">
+              <button class="button is-info is-small is-hoverable" (click)="changeInfoDragon(rowData)">
                 <i class="fas fa-edit"></i>
               </button>
             </td>
             <td>
-              <button class="button is-info is-small is-hovered" (click)="killDragon(rowData)">
+              <button class="button is-info is-small is-hoverable" (click)="killDragon(rowData)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
           </tr>
         </ng-template>
       </p-table>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <button class="button is-info is-medium is-hoverable" (click)="newDragon()">Raise Your Dragon</button>
     </div>
   </div>
 </div>
