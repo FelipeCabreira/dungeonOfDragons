@@ -3,16 +3,16 @@
   <form [formGroup]="birthForm">
     <div class="card">
       <header class="card-header">
-        <div *ngIf="update">
+        <ng-container *ngIf="update">
           <p class="card-header-title">
             Update Information of Dragon
           </p>
-        </div>
-        <div *ngIf="!update">
+        </ng-container>
+        <ng-container *ngIf="!update">
           <p class="card-header-title">
             Create dragon
           </p>
-        </div>
+        </ng-container>
         <a class="card-header-icon" aria-label="more options">
           <span class="icon">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
@@ -50,7 +50,12 @@
         </div>
       </div>
       <footer class="card-footer">
-        <a (click)="saveDragon()" class=" card-footer-item">Save</a>
+        <ng-container *ngIf="update">
+          <a (click)="updateDragon()" class="is-left card-footer-item">Update</a>
+        </ng-container>
+        <ng-container *ngIf="!update">
+          <a (click)="saveDragon()" class="card-footer-item">Save</a>
+        </ng-container>
         <a (click)="deleteDragon(birthForm.value)" class="card-footer-item">Delete</a>
       </footer>
     </div>

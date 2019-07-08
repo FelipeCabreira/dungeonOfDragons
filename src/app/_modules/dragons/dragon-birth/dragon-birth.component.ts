@@ -17,6 +17,7 @@ export class DragonBirthComponent implements OnInit {
   public birthForm: FormGroup;
   public update: boolean;
   public dragonID: number;
+  public dragonInfo: DragonModel;
 
 
   constructor(
@@ -37,9 +38,8 @@ export class DragonBirthComponent implements OnInit {
 
     this._store.select(selectDragonsState).subscribe(
       dragonState => {
-        let dragon;
         if (dragonState !== undefined && dragonState !== null) {
-          dragon = dragonState;
+          this.dragonInfo = dragonState;
           if (dragonState.id !== undefined && dragonState.id !== null) {
             this.update = true;
             this.formUpdate(dragonState);
@@ -50,28 +50,11 @@ export class DragonBirthComponent implements OnInit {
 
     this._store.select(selectDragonsList).subscribe(
       dragonList => {
-        console.log(dragonList);
         this.dragonID = dragonList.id;
       }
     );
   }
 
-  notifier(msg, type, position) {
-    bulmaToast.toast({
-      message: msg,
-      type: type,
-      position: "top-" + position,
-      closeOnClick: true,
-    });
-  }
-
-  formUpdate(form: DragonModel) {
-    this.birthForm.setValue({
-      name: form.name,
-      createAt: form.createdAt,
-      type: form.type
-    });
-  }
 
   saveDragon() {
     if (this.birthForm.valid) {
@@ -80,14 +63,12 @@ export class DragonBirthComponent implements OnInit {
       this.notifier('Dragon Info Send', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
-      this.notifier('Ops, something went wrong !', 'is-danger', 'right');
+      this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
       return;
     }
   }
 
-  returnToDungeon() {
-    this._router.navigate(['./dungeon/dragon-shouts']);
-  }
+
 
   deleteDragon(dragon: DragonModel) {
     const dragonValue = dragon;
@@ -102,8 +83,39 @@ export class DragonBirthComponent implements OnInit {
     }
   }
 
-  // updateDragon() {
-  //   this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
-  // }
+
+  updateDragon() {
+    if (this.birthForm.valid) {
+      const dragonValue = this.birthForm.value;
+      // this._store.dispatch(new DragonUpdate(dragonValue));
+      this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
+      this._store.dispatch(new DragonList());
+    } else {
+      this.notifier('Ops, Something went wrong ! !', 'is-danger', 'right');
+      return;
+    }
+  }
+
+  returnToDungeon() {
+    this._router.navigate(['./dungeon/dragon-shouts']);
+  }
+
+  notifier(msg, type, position) {
+    bulmaToast.toast({
+      message: msg,
+      type: type,
+      position: "top-" + position,
+      closeOnClick: true,
+    });
+  }
+
+
+  formUpdate(form: DragonModel) {
+    this.birthForm.setValue({
+      name: form.name,
+      createAt: form.createdAt,
+      type: form.type
+    });
+  }
 
 }
