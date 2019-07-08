@@ -6,9 +6,26 @@
 
     <div class="content">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-        <input id="user" name="user" title="user" placeholder="User Name" required autofocus>
-        <input id="password" type="password" name="password" title="password" placeholder="Password" required>
+        <div class="field">
+          <label class="label">User</label>
+          <div class="control">
+            <input id="user" name="user" title="user" placeholder="User" autofocus formControlName="user">
+            <span class="help is-small is-danger" *ngIf="!loginForm.get('user').valid && loginForm.get('user').touched">
+              This field is required
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input id="password" type="password" name="password" title="password" placeholder="Password"
+              formControlName="password">
+            <span class="help is-small is-danger"
+              *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+              This field is required
+            </span>
+          </div>
+        </div>
 
         <button type="submit" class="btn btn-primary">Login</button>
       </form>

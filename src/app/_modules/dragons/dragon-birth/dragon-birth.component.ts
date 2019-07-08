@@ -62,7 +62,7 @@ export class DragonBirthComponent implements OnInit {
     if (this.birthForm.valid) {
       const dragonValue = this.birthForm.value;
       this._store.dispatch(new DragonSave(dragonValue));
-      this.notifier('Dragon Info Send', 'is-success', 'right');
+      this.notifier('DRAGON INFO SEND !!', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
       this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
@@ -77,7 +77,7 @@ export class DragonBirthComponent implements OnInit {
     dragonValue.id = this.dragonID;
     if (this.birthForm.valid && dragonValue.id !== undefined && dragonValue.id !== null) {
       this._store.dispatch(new DragonDelete(dragonValue.id));
-      this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
+      this.notifier('KILL WITH FIRE !! WAIT... !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
       this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
@@ -91,7 +91,7 @@ export class DragonBirthComponent implements OnInit {
     dragonValue.id = this.dragonID;
     if (this.birthForm.valid && dragonValue.id !== undefined && dragonValue.id !== null) {
       this._store.dispatch(new DragonUpdate(dragonValue));
-      this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
+      this.notifier('UPDATED GEAR FOR THIS DRAGON ! !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
       this.notifier('Ops, Something went wrong ! !', 'is-danger', 'right');

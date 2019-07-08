@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this._route.navigate(['/dungeon']);
+    if (this.loginForm.valid) {
+      this._route.navigate(['/dungeon']);
+    }
   }
 }
