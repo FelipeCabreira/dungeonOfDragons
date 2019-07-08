@@ -49,12 +49,12 @@ export class DragonShoutsComponent implements OnInit {
       type: '',
       histories: []
     };
-    this._store.dispatch(new DragonState(newDragon, false));
+    this._store.dispatch(new DragonState(newDragon));
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 
   changeInfoDragon(dragonSpec) {
-    this._store.dispatch(new DragonState(dragonSpec.id, true));
+    this._store.dispatch(new DragonState(dragonSpec.id));
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 
