@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
-import { DragonList } from 'src/app/_state/general/general.actions';
+import { DragonList, DragonDelete } from 'src/app/_state/general/general.actions';
 import { selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 import { DragonTableModel } from 'src/app/_models/dragon-table.model';
 import { Router } from '@angular/router';
+import * as bulmaToast from "bulma-toast";
 
 @Component({
   selector: 'app-dragon-shouts',
@@ -52,8 +53,24 @@ export class DragonShoutsComponent implements OnInit {
 
   killDragon(dragonSpec) {
     // dispatch action to remove
-    console.log(dragonSpec.id);
-    alert('KILL WITH FIRE... oh wait...')
+    if (dragonSpec !== undefined && dragonSpec !== null) {
+      this.notifier('KILL WITH FIRE !, Wait...', 'is-success', 'right');
+      this._store.dispatch(new DragonDelete(dragonSpec.id));
+      this._store.dispatch(new DragonList());
+    } else {
+      this.notifier('Ops, Something went wrong !, Wait...', 'is-danger', 'right');
+      this._store.dispatch(new DragonList());
+      return;
+    }
+  }
+
+  notifier(msg, type, position) {
+    bulmaToast.toast({
+      message: msg,
+      type: type,
+      position: "top-" + position,
+      closeOnClick: true,
+    });
   }
 
 }

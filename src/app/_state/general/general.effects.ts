@@ -81,13 +81,8 @@ export class GeneralEffects {
         .pipe(
             ofType(GeneralActionTypes.DragonSave),
             mergeMap((action: DragonSave) => {
-                const body: DragonModel = {
-                    id: 50,
-                    createdAt: "2018",
-                    name: "Dovaah",
-                    type: "Fire",
-                    histories: []
-                };
+                
+                const body: DragonModel = action.body;
                 return this._api.post('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon', body).pipe(
                     map((data: any) => {
                         const dragonData = data.body;

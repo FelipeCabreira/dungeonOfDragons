@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router'
 import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
 import * as bulmaToast from "bulma-toast";
+import { DragonSave, DragonDelete, DragonList } from 'src/app/_state/general/general.actions';
 
 @Component({
   selector: 'app-dragon-birth',
@@ -33,6 +34,10 @@ export class DragonBirthComponent implements OnInit {
       type: ['', Validators.required],
     });
 
+    // this.birthForm.get('name').valueChanges.subscribe(res => {
+    //   console.log(res);
+    // });
+
 
   }
 
@@ -40,8 +45,9 @@ export class DragonBirthComponent implements OnInit {
     bulmaToast.toast({
       message: msg,
       type: type,
-      position: "top-" + position
-    });
+      position: "top-" + position,
+      closeOnClick: true,
+    }); 
   }
 
   verifyId() {
@@ -55,16 +61,32 @@ export class DragonBirthComponent implements OnInit {
     );
   }
 
+  saveDragon(){
+    if(this.birthForm.valid){
+      const dragonValue = this.birthForm.value;
+      this._store.dispatch(new DragonSave(dragonValue));
+      this.notifier('Dragon Info Send','is-success','right');
+      this._store.dispatch(new DragonList());
+    } else {
+      this.notifier('Ops, something went wrong !','is-danger','right');
+      return;
+    }
+  }
+
   returnToDungeon() {
     this._router.navigate(['./dungeon/dragon-shouts']);
   }
 
-  saveDragon() {
-    this.notifier('A NEW DRAGON IS BORN !', 'is-success', 'right');
-  }
-
   deleteDragon() {
-    this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
+    const dragonID = this.birthForm.get('id');
+    if(dragonID !== undefined && dragonID !== null){
+      this._store.dispatch(new DragonDelete(dragonID));
+      this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
+      this._store.dispatch(new DragonList());
+    } else {
+      this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
+      return;
+    }
   }
 
   updateDragon() {
