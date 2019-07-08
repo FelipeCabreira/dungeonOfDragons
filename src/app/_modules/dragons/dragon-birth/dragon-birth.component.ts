@@ -26,7 +26,11 @@ export class DragonBirthComponent implements OnInit {
       name: ['', Validators.required],
       type: ['', Validators.required],
     });
-    bulmaToast.toast({})
+    bulmaToast.toast({
+      message: "CHEGOU",
+      type: "is-success",
+      position: "top-right"
+    })
     //   bulmaToast.toast({
   //     message: "FUUUS RO DAAAAH !!!!",
   //     type: "is-success",

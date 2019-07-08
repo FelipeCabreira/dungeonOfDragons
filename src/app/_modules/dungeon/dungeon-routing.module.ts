@@ -35,7 +35,6 @@ const routes: Routes = [
       }
     ]
   },
-  { path: '**', redirectTo: 'dungeon', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -23,7 +23,9 @@ export class DungeonComponent implements OnInit {
     this._store.select(selectLocateDungeon).subscribe(
       info => {
         if (info !== undefined && info !== null) {
-          this.atDungeon = info;
+          setTimeout(() => {
+            this.atDungeon = info;
+          }, 0);
         }
       }
     );
