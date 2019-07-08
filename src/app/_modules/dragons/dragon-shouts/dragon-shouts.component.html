@@ -17,7 +17,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
           <tr>
-            <td *ngFor="let infoDragon of columns">
+            <td *ngFor="let infoDragon of columns" (click)="showSpecs(rowData)">
               {{rowData[infoDragon.field]}}
             </td>
             <td>
@@ -37,7 +37,14 @@
   </div>
   <div class="columns">
     <div class="column">
-      <button class="button is-info is-medium is-hoverable" (click)="newDragon()">Raise Your Dragon</button>
+      <button class="button is-info is-medium is-hoverable" (click)="newDragon()">
+        <span class="icon is-small">
+          <i class="fas fa-plus"></i>
+        </span>
+        <span>
+          Raise Your Dragon
+        </span>
+      </button>
     </div>
   </div>
 </div>

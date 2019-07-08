@@ -1,2 +1,40 @@
 <!-- Dragon Definitions // What types they are ? -->
-<p>dragon-specs works!</p>
+<div class="container">
+  <form [formGroup]="specsForm">
+    <div class="card">
+      <header class="card-header">
+
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Name" formControlName="name">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Type" formControlName="type">
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Date of Birth</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Date of Birth" formControlName="createAt">
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="card-footer">
+
+      </footer>
+    </div>
+    <div class="hero">
+      <button class="button is-info is-medium is-hoverable" (click)="returnToDungeon()">
+        Back
+      </button>
+    </div>
+  </form>
+</div>

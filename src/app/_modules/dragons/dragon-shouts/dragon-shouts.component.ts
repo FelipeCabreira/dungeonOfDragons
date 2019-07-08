@@ -67,6 +67,12 @@ export class DragonShoutsComponent implements OnInit {
   }
 
 
+  showSpecs(dragonSpec) {
+    this._store.dispatch(new DragonState(dragonSpec.id));
+    this._route.navigate(['/dungeon/dragon-specs']);
+  }
+
+
   // updateVisibility(dragonSpec): void {
   //   this.visible = false;
   //   setTimeout(() => {
