@@ -5,7 +5,7 @@ import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
 import * as bulmaToast from "bulma-toast";
 import { DragonSave, DragonDelete, DragonList } from 'src/app/_state/general/general.actions';
-import { selectDragonsState } from 'src/app/_state/general/general.selectors';
+import { selectDragonsState, selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 
 @Component({
@@ -16,6 +16,7 @@ import { DragonModel } from 'src/app/_models/dragon.model';
 export class DragonBirthComponent implements OnInit {
   public birthForm: FormGroup;
   public update: boolean;
+  public dragonID: number;
 
 
   constructor(
@@ -44,6 +45,13 @@ export class DragonBirthComponent implements OnInit {
             this.formUpdate(dragonState);
           }
         }
+      }
+    );
+
+    this._store.select(selectDragonsList).subscribe(
+      dragonList => {
+        console.log(dragonList);
+        this.dragonID = dragonList.id;
       }
     );
   }
@@ -81,10 +89,11 @@ export class DragonBirthComponent implements OnInit {
     this._router.navigate(['./dungeon/dragon-shouts']);
   }
 
-  deleteDragon() {
-    const dragonID = this.birthForm.get('id');
-    if (dragonID !== undefined && dragonID !== null) {
-      this._store.dispatch(new DragonDelete(dragonID));
+  deleteDragon(dragon: DragonModel) {
+    const dragonValue = dragon;
+    dragonValue.id = this.dragonID;
+    if (dragonValue.id !== undefined && dragonValue.id !== null) {
+      this._store.dispatch(new DragonDelete(dragonValue.id));
       this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
@@ -93,8 +102,8 @@ export class DragonBirthComponent implements OnInit {
     }
   }
 
-  updateDragon() {
-    this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
-  }
+  // updateDragon() {
+  //   this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
+  // }
 
 }

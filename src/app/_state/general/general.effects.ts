@@ -73,7 +73,7 @@ export class GeneralEffects {
                 );
             }),
             catchError((err, caught) => {
-                this._store.dispatch(new DragonStateError(err,));
+                this._store.dispatch(new DragonStateError(err));
                 return caught;
             })
         );
@@ -84,7 +84,12 @@ export class GeneralEffects {
             ofType(GeneralActionTypes.DragonSave),
             mergeMap((action: DragonSave) => {
 
-                const body: DragonModel = action.body;
+                const body: DragonModel = {
+                    createdAt: new Date().toLocaleString(),
+                    name: action.body.name,
+                    type: action.body.type,
+                    histories: []
+                };
                 return this._api.post('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon', body).pipe(
                     map((data: any) => {
                         const dragonData = data.body;
