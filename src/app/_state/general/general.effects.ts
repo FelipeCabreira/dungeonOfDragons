@@ -65,13 +65,15 @@ export class GeneralEffects {
             mergeMap((action: DragonState) => {
                 return this._api.get('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + action.id).pipe(
                     map((data: any) => {
-                        const dragonData = data.body;
-                        return new DragonStateSuccess(dragonData);
+                        if (action.id !== undefined && action.id !== null) {
+                            const dragonData = data.body;
+                            return new DragonStateSuccess(dragonData);
+                        }
                     })
                 );
             }),
             catchError((err, caught) => {
-                this._store.dispatch(new DragonStateError(err));
+                this._store.dispatch(new DragonStateError(err,));
                 return caught;
             })
         );
@@ -81,7 +83,7 @@ export class GeneralEffects {
         .pipe(
             ofType(GeneralActionTypes.DragonSave),
             mergeMap((action: DragonSave) => {
-                
+
                 const body: DragonModel = action.body;
                 return this._api.post('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon', body).pipe(
                     map((data: any) => {

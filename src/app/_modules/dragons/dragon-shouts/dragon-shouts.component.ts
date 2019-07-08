@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
-import { DragonList, DragonDelete } from 'src/app/_state/general/general.actions';
+import { DragonList, DragonDelete, DragonState } from 'src/app/_state/general/general.actions';
 import { selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 import { DragonTableModel } from 'src/app/_models/dragon-table.model';
@@ -42,10 +42,19 @@ export class DragonShoutsComponent implements OnInit {
   }
 
   newDragon() {
+    // this._store.dispatch(new DragonList());
+    const newDragon: DragonModel = {
+      createdAt: new Date().toLocaleString(),
+      name: '',
+      type: '',
+      histories: []
+    };
+    this._store.dispatch(new DragonState(newDragon, false));
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 
   changeInfoDragon(dragonSpec) {
+    this._store.dispatch(new DragonState(dragonSpec.id, true));
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 

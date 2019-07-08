@@ -99,7 +99,7 @@ export class DragonListError implements Action {
 export class DragonState implements Action {
     readonly type = GeneralActionTypes.DragonState;
 
-    constructor(public id: any) {}
+    constructor(public id: any, public update: boolean) {}
 }
 export class DragonStateSuccess implements Action {
     readonly type = GeneralActionTypes.DragonStateSuccess;

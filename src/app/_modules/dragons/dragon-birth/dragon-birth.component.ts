@@ -5,6 +5,8 @@ import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
 import * as bulmaToast from "bulma-toast";
 import { DragonSave, DragonDelete, DragonList } from 'src/app/_state/general/general.actions';
+import { selectDragonsState, selectDragonsStateUpdate } from 'src/app/_state/general/general.selectors';
+import { DragonModel } from 'src/app/_models/dragon.model';
 
 @Component({
   selector: 'app-dragon-birth',
@@ -25,8 +27,6 @@ export class DragonBirthComponent implements OnInit {
 
   ngOnInit() {
     this.update = false;
-    this.verifyId();
-    this.notifier('Chegou', 'is-success', 'right');
 
     this.birthForm = this._formBuilder.group({
       createAt: [{ value: '', disabled: true },],
@@ -34,11 +34,17 @@ export class DragonBirthComponent implements OnInit {
       type: ['', Validators.required],
     });
 
-    // this.birthForm.get('name').valueChanges.subscribe(res => {
-    //   console.log(res);
-    // });
-
-
+    this._store.select(selectDragonsState).subscribe(
+      dragonState => {
+        let dragon;
+        if (dragonState !== undefined && dragonState !== null) {
+          dragon = dragonState;
+          if(dragonState.id !== undefined && dragonState.id !== null){
+            this.update = true;
+          }
+        }
+      }
+    );
   }
 
   notifier(msg, type, position) {
@@ -47,28 +53,17 @@ export class DragonBirthComponent implements OnInit {
       type: type,
       position: "top-" + position,
       closeOnClick: true,
-    }); 
+    });
   }
 
-  verifyId() {
-    this._route.paramMap.subscribe(
-      (params) => {
-        let data = params.get('id');
-        if (data !== undefined && data !== null) {
-          this.update = true;
-        }
-      }
-    );
-  }
-
-  saveDragon(){
-    if(this.birthForm.valid){
+  saveDragon() {
+    if (this.birthForm.valid) {
       const dragonValue = this.birthForm.value;
       this._store.dispatch(new DragonSave(dragonValue));
-      this.notifier('Dragon Info Send','is-success','right');
+      this.notifier('Dragon Info Send', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
-      this.notifier('Ops, something went wrong !','is-danger','right');
+      this.notifier('Ops, something went wrong !', 'is-danger', 'right');
       return;
     }
   }
@@ -79,7 +74,7 @@ export class DragonBirthComponent implements OnInit {
 
   deleteDragon() {
     const dragonID = this.birthForm.get('id');
-    if(dragonID !== undefined && dragonID !== null){
+    if (dragonID !== undefined && dragonID !== null) {
       this._store.dispatch(new DragonDelete(dragonID));
       this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
