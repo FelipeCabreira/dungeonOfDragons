@@ -5,7 +5,7 @@ import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
 import * as bulmaToast from "bulma-toast";
 import { DragonSave, DragonDelete, DragonList, DragonUpdate } from 'src/app/_state/general/general.actions';
-import { selectDragonsState, selectDragonsList, selectDragonsUpdate } from 'src/app/_state/general/general.selectors';
+import { selectDragonsState, selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 
 @Component({
