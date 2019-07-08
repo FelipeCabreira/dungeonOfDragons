@@ -28,4 +28,8 @@ export class HeaderComponent implements OnInit {
     this._route.navigate(['./dungeon']);
   }
 
+  logout(){
+    this._route.navigate(['./login']);
+  }
+
 }

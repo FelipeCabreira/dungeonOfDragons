@@ -11,6 +11,7 @@ import { DragonBirthComponent } from '../dragons/dragon-birth/dragon-birth.compo
 const routes: Routes = [
   {
     path: 'dungeon',
+    component: DungeonComponent,
     // canActivate: [AuthGuard],
     children: [
       {
