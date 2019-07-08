@@ -25,12 +25,20 @@
             <label class="label">Name</label>
             <div class="control">
               <input class="input" type="text" placeholder="Name" formControlName="name">
+              <span class="help is-small is-danger"
+                *ngIf="!birthForm.get('name').valid && birthForm.get('name').touched">
+                Este campo é obrigatório
+              </span>
             </div>
           </div>
           <div class="field">
             <label class="label">Type</label>
             <div class="control">
               <input class="input" type="text" placeholder="Type" formControlName="type">
+              <span class="help is-small is-danger"
+                *ngIf="!birthForm.get('type').valid && birthForm.get('type').touched">
+                Este campo é obrigatório
+              </span>
             </div>
           </div>
           <div class="field">
