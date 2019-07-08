@@ -28,7 +28,7 @@ export class DragonBirthComponent implements OnInit {
     this.notifier('Chegou', 'is-success', 'right');
 
     this.birthForm = this._formBuilder.group({
-      createAt: [{ value: '' }],
+      createAt: [{ value: '', disabled: true },],
       name: ['', Validators.required],
       type: ['', Validators.required],
     });
@@ -60,15 +60,15 @@ export class DragonBirthComponent implements OnInit {
   }
 
   saveDragon() {
-    this.notifier('A NEW DRAGON IS BORN !','is-success','right');
+    this.notifier('A NEW DRAGON IS BORN !', 'is-success', 'right');
   }
 
   deleteDragon() {
-    this.notifier('KILL WITH FIRE!, Wait... !','is-success','right');
+    this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
   }
 
   updateDragon() {
-    this.notifier('GET NEW GEAR TO THIS DRAGON ! !','is-success','right');
+    this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
   }
 
 }
