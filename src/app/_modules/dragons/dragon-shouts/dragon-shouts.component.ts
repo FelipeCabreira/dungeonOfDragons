@@ -42,14 +42,6 @@ export class DragonShoutsComponent implements OnInit {
   }
 
   newDragon() {
-    // this._store.dispatch(new DragonList());
-    const newDragon: DragonModel = {
-      createdAt: new Date().toLocaleString(),
-      name: '',
-      type: '',
-      histories: []
-    };
-    this._store.dispatch(new DragonState(newDragon));
     this._route.navigate(['/dungeon/dragon-birth']);
   }
 
