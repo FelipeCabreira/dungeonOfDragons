@@ -39,8 +39,9 @@ export class DragonBirthComponent implements OnInit {
         let dragon;
         if (dragonState !== undefined && dragonState !== null) {
           dragon = dragonState;
-          if(dragonState.id !== undefined && dragonState.id !== null){
+          if (dragonState.id !== undefined && dragonState.id !== null) {
             this.update = true;
+            this.formUpdate(dragonState);
           }
         }
       }
@@ -53,6 +54,14 @@ export class DragonBirthComponent implements OnInit {
       type: type,
       position: "top-" + position,
       closeOnClick: true,
+    });
+  }
+
+  formUpdate(form: DragonModel) {
+    this.birthForm.setValue({
+      name: form.name,
+      createAt: form.createdAt,
+      type: form.type
     });
   }
 
