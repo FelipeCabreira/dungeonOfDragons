@@ -106,13 +106,16 @@ export function generalReducer(state: GeneralState = initialState, action: Gener
                 ...state,
                 dragon: action.payload,
             };
-
-
-
-
-
-
-
+        case GeneralActionTypes.DragonUpdateSuccess:
+            return {
+                ...state,
+                dragon: action.payload,
+            };
+        case GeneralActionTypes.DragonUpdateError:
+            return {
+                ...state,
+                dragon: action.payload,
+            };
         case GeneralActionTypes.LogoutState:
             return {
                 ...state,

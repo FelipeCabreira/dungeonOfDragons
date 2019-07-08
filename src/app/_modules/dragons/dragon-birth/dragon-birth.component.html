@@ -51,7 +51,7 @@
       </div>
       <footer class="card-footer">
         <ng-container *ngIf="update">
-          <a (click)="updateDragon()" class="is-left card-footer-item">Update</a>
+          <a (click)="updateDragon(birthForm.value)" class="is-left card-footer-item">Update</a>
         </ng-container>
         <ng-container *ngIf="!update">
           <a (click)="saveDragon()" class="card-footer-item">Save</a>

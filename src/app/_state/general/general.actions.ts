@@ -35,6 +35,10 @@ export enum GeneralActionTypes {
     DragonDeleteSuccess = '[General] Dragon Delete Success',
     DragonDeleteError = '[General] Dragon Delete Error',
 
+    DragonUpdate = '[General] Dragon Update',
+    DragonUpdateSuccess = '[General] Dragon Update Success',
+    DragonUpdateError = '[General] Dragon Update Error',
+
     // Restart redux
     ClearSession = '[General] Clear session',
 }
@@ -147,6 +151,23 @@ export class DragonDeleteError implements Action {
     constructor(public payload: any) {
     }
 }
+export class DragonUpdate implements Action {
+    readonly type = GeneralActionTypes.DragonUpdate;
+
+    constructor(public body:any) {}
+}
+export class DragonUpdateSuccess implements Action {
+    readonly type = GeneralActionTypes.DragonUpdateSuccess;
+
+    constructor(public payload: any) {
+    }
+}
+export class DragonUpdateError implements Action {
+    readonly type = GeneralActionTypes.DragonUpdateError;
+
+    constructor(public payload: any) {
+    }
+}
 export class LogoutState implements Action {
     readonly type = GeneralActionTypes.LogoutState;
 
@@ -190,6 +211,9 @@ export type GeneralActions =
     | DragonDelete
     | DragonDeleteSuccess
     | DragonDeleteError
+    | DragonUpdate
+    | DragonUpdateSuccess
+    | DragonUpdateError
     | LogoutState
     | LogoutStateSuccess
     | LogoutStateError

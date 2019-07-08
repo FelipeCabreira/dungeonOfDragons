@@ -4,8 +4,8 @@ import { Router, ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router'
 import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
 import * as bulmaToast from "bulma-toast";
-import { DragonSave, DragonDelete, DragonList } from 'src/app/_state/general/general.actions';
-import { selectDragonsState, selectDragonsList } from 'src/app/_state/general/general.selectors';
+import { DragonSave, DragonDelete, DragonList, DragonUpdate } from 'src/app/_state/general/general.actions';
+import { selectDragonsState, selectDragonsList, selectDragonsUpdate } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 
 @Component({
@@ -50,7 +50,9 @@ export class DragonBirthComponent implements OnInit {
 
     this._store.select(selectDragonsList).subscribe(
       dragonList => {
-        this.dragonID = dragonList.id;
+        if (dragonList !== undefined && dragonList !== null) {
+          this.dragonID = dragonList.id;
+        }
       }
     );
   }
@@ -73,7 +75,7 @@ export class DragonBirthComponent implements OnInit {
   deleteDragon(dragon: DragonModel) {
     const dragonValue = dragon;
     dragonValue.id = this.dragonID;
-    if (dragonValue.id !== undefined && dragonValue.id !== null) {
+    if (this.birthForm.valid && dragonValue.id !== undefined && dragonValue.id !== null) {
       this._store.dispatch(new DragonDelete(dragonValue.id));
       this.notifier('KILL WITH FIRE!, Wait... !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
@@ -84,10 +86,11 @@ export class DragonBirthComponent implements OnInit {
   }
 
 
-  updateDragon() {
-    if (this.birthForm.valid) {
-      const dragonValue = this.birthForm.value;
-      // this._store.dispatch(new DragonUpdate(dragonValue));
+  updateDragon(dragon: DragonModel) {
+    const dragonValue = dragon;
+    dragonValue.id = this.dragonID;
+    if (this.birthForm.valid && dragonValue.id !== undefined && dragonValue.id !== null) {
+      this._store.dispatch(new DragonUpdate(dragonValue));
       this.notifier('GET NEW GEAR TO THIS DRAGON ! !', 'is-success', 'right');
       this._store.dispatch(new DragonList());
     } else {
