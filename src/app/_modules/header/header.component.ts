@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   callEntrance() {
     this._store.dispatch(new LocateDungeon(true));
-    this._route.navigate(['./dungeon']);
+    this._route.navigate(['./dungeon/dragon-shouts']);
   }
 
   logout(){
