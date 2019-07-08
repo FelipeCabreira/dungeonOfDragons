@@ -15,9 +15,13 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       {
-        path: 'dragons',
+        path: '',
         component: DragonsComponent,
         children: [
+          {
+            path: 'dragon-birth',
+            component: DragonBirthComponent
+          },
           {
             path: 'dragon-shouts',
             component: DragonShoutsComponent
@@ -26,11 +30,6 @@ const routes: Routes = [
             path: 'dragon-specs',
             component: DragonSpecsComponent
           },
-          {
-            path: 'dragon-birth',
-            component: DragonBirthComponent
-          },
-
         ]
       }
     ]
@@ -38,7 +37,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     RouterModule.forChild(routes),
     CommonModule

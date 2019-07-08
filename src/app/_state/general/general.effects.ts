@@ -36,21 +36,21 @@ export class GeneralEffects {
         .pipe(
             ofType(GeneralActionTypes.DragonList),
             mergeMap((action: DragonList) => {
-                this._store.dispatch(new ChangeLoading(true));
+                // this._store.dispatch(new ChangeLoading(true));
                 return this._api.get('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon').pipe(
                     map((data: any) => {
-                        this._store.dispatch(new ChangeLoading(false));
+                        // this._store.dispatch(new ChangeLoading(false));
                         const dragonData = data.body;
                         // this._store.dispatch(new ClearSession());
                         // this._service.logout();
                         // this._cookies.deleteAll();
-                        // this._router.navigate(['./login']);
+                        this._router.navigate(['./dungeon/dragon-shouts']);
                         return new DragonListSuccess(dragonData);
                     })
                 );
             }),
             catchError((err, caught) => {
-                this._store.dispatch(new ChangeLoading(false));
+                // this._store.dispatch(new ChangeLoading(false));
                 // this._service.logout();
                 // this._cookies.deleteAll();
                 this._store.dispatch(new DragonListError(err));

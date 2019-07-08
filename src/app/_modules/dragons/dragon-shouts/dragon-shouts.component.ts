@@ -23,7 +23,7 @@ export class DragonShoutsComponent implements OnInit {
   constructor(
     private _store: Store<AppState>,
     private _route: Router,
-    ) { }
+  ) { }
 
 
 
@@ -39,17 +39,17 @@ export class DragonShoutsComponent implements OnInit {
     );
   }
 
-  newDragon(){
-    this._route.navigate(['/dungeon/dragons/dragon-birth']);
+  newDragon() {
+    this._route.navigate(['/dungeon/dragon-birth']);
   }
-  
+
   changeInfoDragon(dragonSpec) {
     // dispatch action to edit
     console.log(dragonSpec.id);
-    this._route.navigate(['/dungeon/dragons/dragon-birth']);
+    this._route.navigate(['/dungeon/dragon-birth']);
   }
-  
-  
+
+
   killDragon(dragonSpec) {
     // dispatch action to remove
     console.log(dragonSpec.id);
