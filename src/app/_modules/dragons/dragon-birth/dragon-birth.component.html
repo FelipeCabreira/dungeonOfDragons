@@ -1,2 +1,66 @@
 <!-- The birth ( creating ) of a Dovah ! ( known as dragons ) -->
-<p>dragon-birth works!</p>
+<div class="container">
+  <form [formGroup]="birthForm">
+    <div class="card">
+      <header class="card-header">
+        <ng-container *ngIf="update">
+          <p class="card-header-title">
+            Update Information of Dragon
+          </p>
+        </ng-container>
+        <ng-container *ngIf="!update">
+          <p class="card-header-title">
+            Create dragon
+          </p>
+        </ng-container>
+        <a class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Name" formControlName="name">
+              <span class="help is-small is-danger"
+                *ngIf="!birthForm.get('name').valid && birthForm.get('name').touched">
+                This field is required
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Type</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Type" formControlName="type">
+              <span class="help is-small is-danger"
+                *ngIf="!birthForm.get('type').valid && birthForm.get('type').touched">
+                This field is required
+              </span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Date of Birth</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Date of Birth" formControlName="createAt">
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <ng-container *ngIf="update">
+          <a (click)="updateDragon(birthForm.value)" class="is-left card-footer-item">Update</a>
+        </ng-container>
+        <ng-container *ngIf="!update">
+          <a (click)="saveDragon()" class="card-footer-item">Save</a>
+        </ng-container>
+        <a (click)="deleteDragon(birthForm.value)" class="card-footer-item">Delete</a>
+      </footer>
+    </div>
+    <div class="hero">
+      <button class="button is-info is-medium is-hoverable" (click)="returnToDungeon()"> Back </button>
+    </div>
+  </form>
+</div>

@@ -12,3 +12,15 @@ export const selectDragonsList = createSelector(
 	selectGeneralState,
 	(generalState: GeneralState) => generalState.dragon
 );
+
+export const selectDragonsState = createSelector(
+	selectGeneralState,
+	(generalState: GeneralState) => generalState.dragon
+);
+
+export const selectDragonID = createSelector(
+	selectGeneralState,
+	(generalState: GeneralState) => generalState.selected
+);
+
+

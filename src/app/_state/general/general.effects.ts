@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 // tslint:disable-next-line: max-line-length
-import { GeneralActionTypes, ChangeLoading, LoginTokenState, ClearSession, LoginState, LoginStateSuccess, LoginStateError, LogoutState, LogoutStateSuccess, LogoutStateError, DragonList, DragonListSuccess, DragonListError, DragonState, DragonStateSuccess, DragonStateError, DragonSave, DragonSaveSuccess, DragonSaveError, DragonDelete, DragonDeleteSuccess, DragonDeleteError } from './general.actions';
+import { GeneralActionTypes, ChangeLoading, LoginTokenState, ClearSession, LoginState, LoginStateSuccess, LoginStateError, LogoutState, LogoutStateSuccess, LogoutStateError, DragonList, DragonListSuccess, DragonListError, DragonState, DragonStateSuccess, DragonStateError, DragonSave, DragonSaveSuccess, DragonSaveError, DragonDelete, DragonDeleteSuccess, DragonDeleteError, DragonUpdate, DragonUpdateSuccess, DragonUpdateError } from './general.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { GeneralState } from './general.reducer';
@@ -36,23 +36,16 @@ export class GeneralEffects {
         .pipe(
             ofType(GeneralActionTypes.DragonList),
             mergeMap((action: DragonList) => {
-                this._store.dispatch(new ChangeLoading(true));
                 return this._api.get('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon').pipe(
                     map((data: any) => {
-                        this._store.dispatch(new ChangeLoading(false));
+
                         const dragonData = data.body;
-                        // this._store.dispatch(new ClearSession());
-                        // this._service.logout();
-                        // this._cookies.deleteAll();
-                        // this._router.navigate(['./login']);
+                        this._router.navigate(['./dungeon/dragon-shouts']);
                         return new DragonListSuccess(dragonData);
                     })
                 );
             }),
             catchError((err, caught) => {
-                this._store.dispatch(new ChangeLoading(false));
-                // this._service.logout();
-                // this._cookies.deleteAll();
                 this._store.dispatch(new DragonListError(err));
                 return caught;
             })
@@ -65,8 +58,10 @@ export class GeneralEffects {
             mergeMap((action: DragonState) => {
                 return this._api.get('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + action.id).pipe(
                     map((data: any) => {
-                        const dragonData = data.body;
-                        return new DragonStateSuccess(dragonData);
+                        if (action.id !== undefined && action.id !== null) {
+                            const dragonData = data.body;
+                            return new DragonStateSuccess(dragonData);
+                        }
                     })
                 );
             }),
@@ -82,10 +77,9 @@ export class GeneralEffects {
             ofType(GeneralActionTypes.DragonSave),
             mergeMap((action: DragonSave) => {
                 const body: DragonModel = {
-                    id: 50,
-                    createdAt: "2018",
-                    name: "Dovaah",
-                    type: "Fire",
+                    createdAt: new Date().toLocaleString(),
+                    name: action.body.name,
+                    type: action.body.type,
                     histories: []
                 };
                 return this._api.post('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon', body).pipe(
@@ -101,24 +95,29 @@ export class GeneralEffects {
             })
         );
 
-    // @Effect() // PUT - UPDATE DRAGONS
-    // DragonUpdateEffects$ = this._actions$
-    //     .pipe(
-    //         ofType(GeneralActionTypes.Dragon),
-    //         mergeMap((action: DragonDelete) => {
-    //             const body: DragonModel = { };
-    //             return this._api.put('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + action.id, body).pipe(
-    //                 map((data: any) => {
-    //                     const dragonData = data.body;
-    //                     return new DragonStateSuccess(dragonData);
-    //                 })
-    //             );
-    //         }),
-    //         catchError((err, caught) => {
-    //             this._store.dispatch(new DragonStateError(err));
-    //             return caught;
-    //         })
-    //     );
+    @Effect() // PUT - UPDATE DRAGONS
+    DragonUpdateEffects$ = this._actions$
+        .pipe(
+            ofType(GeneralActionTypes.DragonUpdate),
+            mergeMap((action: DragonUpdate) => {
+                const body: DragonModel = {
+                    createdAt: new Date().toLocaleString(),
+                    name: action.body.name,
+                    type: action.body.type,
+                    histories: []
+                };
+                return this._api.put('https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/' + action.body.id, body).pipe(
+                    map((data: any) => {
+                        const dragonData = data;
+                        return new DragonSaveSuccess(dragonData);
+                    })
+                );
+            }),
+            catchError((err, caught) => {
+                this._store.dispatch(new DragonSaveError(err));
+                return caught;
+            })
+        );
 
     @Effect() // DELETE - SAVE DRAGONS
     DragonEffects$ = this._actions$

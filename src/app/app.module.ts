@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 // EXTERNAL LIB
 import { CookieService } from 'ngx-cookie-service';
+import { TableModule } from 'primeng/table';
 // COMPONENTS
 import { AppComponent } from './app.component';
 import { DungeonComponent } from './_modules/dungeon/dungeon.component';
@@ -43,6 +45,8 @@ import { GeneralEffects } from './_state/general/general.effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    TableModule,
     DungeonRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers: [clearState] }),
     StoreDevtoolsModule.instrument({

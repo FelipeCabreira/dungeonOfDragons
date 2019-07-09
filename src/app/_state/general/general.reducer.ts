@@ -9,6 +9,7 @@ export interface GeneralState {
     token: TokenModel;
     dragon: DragonModel;
     dungeon: boolean;
+    selected: number;
 }
 
 // valores iniciais para cada uma das actions
@@ -17,6 +18,7 @@ export const initialState: GeneralState = {
     token: null,
     dragon: null,
     dungeon: false,
+    selected: 0,
 };
 
 export function generalReducer(state: GeneralState = initialState, action: GeneralActions): GeneralState {
@@ -106,13 +108,16 @@ export function generalReducer(state: GeneralState = initialState, action: Gener
                 ...state,
                 dragon: action.payload,
             };
-
-
-
-
-
-
-
+        case GeneralActionTypes.DragonUpdateSuccess:
+            return {
+                ...state,
+                dragon: action.payload,
+            };
+        case GeneralActionTypes.DragonUpdateError:
+            return {
+                ...state,
+                dragon: action.payload,
+            };
         case GeneralActionTypes.LogoutState:
             return {
                 ...state,
@@ -127,6 +132,12 @@ export function generalReducer(state: GeneralState = initialState, action: Gener
             return {
                 ...state,
                 token: null,
+            };
+        case GeneralActionTypes.SelectDragonID:
+            return {
+                ...state,
+                dragon: action.payload,
+                selected: action.id
             };
 
         default:

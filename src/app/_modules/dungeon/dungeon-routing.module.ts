@@ -5,29 +5,38 @@ import { RouterModule, Routes } from '@angular/router';
 import { DungeonComponent } from './dungeon.component';
 import { DragonsComponent } from '../dragons/dragons.component';
 import { DragonShoutsComponent } from '../dragons/dragon-shouts/dragon-shouts.component';
+import { DragonSpecsComponent } from '../dragons/dragon-specs/dragon-specs.component';
+import { DragonBirthComponent } from '../dragons/dragon-birth/dragon-birth.component';
 
 const routes: Routes = [
   {
     path: 'dungeon',
+    component: DungeonComponent,
     // canActivate: [AuthGuard],
     children: [
       {
-        path: 'dragons',
+        path: '',
         component: DragonsComponent,
         children: [
           {
+            path: 'dragon-birth',
+            component: DragonBirthComponent
+          },
+          {
             path: 'dragon-shouts',
             component: DragonShoutsComponent
-          }
+          },
+          {
+            path: 'dragon-specs',
+            component: DragonSpecsComponent
+          },
         ]
       }
     ]
   },
-  { path: '**', redirectTo: 'dungeon', pathMatch: 'full' },
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     RouterModule.forChild(routes),
     CommonModule
