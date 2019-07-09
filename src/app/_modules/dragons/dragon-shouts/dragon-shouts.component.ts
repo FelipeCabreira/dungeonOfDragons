@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AppState } from 'src/app/_state/initial';
 import { Store } from '@ngrx/store';
-import { DragonList, DragonDelete, DragonState } from 'src/app/_state/general/general.actions';
+import { DragonList, DragonDelete, DragonState, SelectDragonID } from 'src/app/_state/general/general.actions';
 import { selectDragonsList } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 import { DragonTableModel } from 'src/app/_models/dragon-table.model';
 import { Router } from '@angular/router';
 import * as bulmaToast from "bulma-toast";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dragon-shouts',
@@ -57,7 +58,6 @@ export class DragonShoutsComponent implements OnInit {
       this.notifier('KILLED WITH FIRE ! Wait...', 'is-success', 'right');
       this._store.dispatch(new DragonDelete(dragonSpec.id));
       this._store.dispatch(new DragonList());
-      // this.updateVisibility(dragonSpec);
 
     } else {
       this.notifier('Ops, Something went wrong !', 'is-danger', 'right');
@@ -68,6 +68,7 @@ export class DragonShoutsComponent implements OnInit {
 
 
   showSpecs(dragonSpec) {
+    this._store.dispatch(new SelectDragonID(dragonSpec, dragonSpec.id));
     this._store.dispatch(new DragonState(dragonSpec.id));
     this._route.navigate(['/dungeon/dragon-specs']);
   }

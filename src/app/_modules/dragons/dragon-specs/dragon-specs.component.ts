@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/_state/initial';
-import { selectDragonsState } from 'src/app/_state/general/general.selectors';
+import { selectDragonsState, selectDragonsList, selectDragonID } from 'src/app/_state/general/general.selectors';
 import { DragonModel } from 'src/app/_models/dragon.model';
 
 @Component({
@@ -14,6 +14,8 @@ import { DragonModel } from 'src/app/_models/dragon.model';
 export class DragonSpecsComponent implements OnInit {
   public specsForm: FormGroup;
   public dragonSpec: DragonModel;
+  public dragonID: number;
+  public dragon: DragonModel;
 
   constructor(
     private _router: Router,
@@ -23,16 +25,30 @@ export class DragonSpecsComponent implements OnInit {
 
   ngOnInit() {
     this.specsForm = this._formBuilder.group({
-      createAt: [{ value: '', disabled: true },],
+      createAt: [{ value: '', disabled: true }],
       name: [{ value: '', disabled: true }],
       type: [{ value: '', disabled: true }],
     });
 
+    this._store.select(selectDragonID).subscribe(
+      selectDragon => {
+        if (selectDragon !== undefined && selectDragon !== null) {
+          this.dragonID = selectDragon;
+        }
+      }
+    );
+
     this._store.select(selectDragonsState).subscribe(
       dragonState => {
         if (dragonState !== undefined && dragonState !== null) {
-          this.dragonSpec = dragonState;
-          this.formUpdate(dragonState);
+          Object.values(dragonState).map(
+            res => {
+              if (res === this.dragonID) {
+                this.dragon = dragonState;
+                this.formUpdate(this.dragon);
+              }
+            }
+          );
         }
       }
     );

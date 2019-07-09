@@ -22,7 +22,7 @@ export enum GeneralActionTypes {
     DragonList = '[General] Dragon List',
     DragonListSuccess = '[General] Dragon List Success',
     DragonListError = '[General] Dragon List Error',
-    
+
     DragonState = '[General] Dragon State',
     DragonStateSuccess = '[General] Dragon State Success',
     DragonStateError = '[General] Dragon State Error',
@@ -38,6 +38,8 @@ export enum GeneralActionTypes {
     DragonUpdate = '[General] Dragon Update',
     DragonUpdateSuccess = '[General] Dragon Update Success',
     DragonUpdateError = '[General] Dragon Update Error',
+
+    SelectDragonID = '[General] Dragon Selected',
 
     // Restart redux
     ClearSession = '[General] Clear session',
@@ -86,7 +88,7 @@ export class LoginStateError implements Action {
 export class DragonList implements Action {
     readonly type = GeneralActionTypes.DragonList;
 
-    constructor() {}
+    constructor() { }
 }
 export class DragonListSuccess implements Action {
     readonly type = GeneralActionTypes.DragonListSuccess;
@@ -103,7 +105,7 @@ export class DragonListError implements Action {
 export class DragonState implements Action {
     readonly type = GeneralActionTypes.DragonState;
 
-    constructor(public id: any) {}
+    constructor(public id: any) { }
 }
 export class DragonStateSuccess implements Action {
     readonly type = GeneralActionTypes.DragonStateSuccess;
@@ -120,7 +122,7 @@ export class DragonStateError implements Action {
 export class DragonSave implements Action {
     readonly type = GeneralActionTypes.DragonSave;
 
-    constructor(public body) {}
+    constructor(public body) { }
 }
 export class DragonSaveSuccess implements Action {
     readonly type = GeneralActionTypes.DragonSaveSuccess;
@@ -137,7 +139,7 @@ export class DragonSaveError implements Action {
 export class DragonDelete implements Action {
     readonly type = GeneralActionTypes.DragonDelete;
 
-    constructor(public id:any) {}
+    constructor(public id: any) { }
 }
 export class DragonDeleteSuccess implements Action {
     readonly type = GeneralActionTypes.DragonDeleteSuccess;
@@ -154,7 +156,7 @@ export class DragonDeleteError implements Action {
 export class DragonUpdate implements Action {
     readonly type = GeneralActionTypes.DragonUpdate;
 
-    constructor(public body:any) {}
+    constructor(public body: any) { }
 }
 export class DragonUpdateSuccess implements Action {
     readonly type = GeneralActionTypes.DragonUpdateSuccess;
@@ -184,6 +186,12 @@ export class LogoutStateError implements Action {
     readonly type = GeneralActionTypes.LogoutStateError;
 
     constructor(public payload: any) {
+    }
+}
+export class SelectDragonID implements Action {
+    readonly type = GeneralActionTypes.SelectDragonID;
+
+    constructor(public payload: any, public id: any) {
     }
 }
 export class ClearSession implements Action {
@@ -217,5 +225,6 @@ export type GeneralActions =
     | LogoutState
     | LogoutStateSuccess
     | LogoutStateError
+    | SelectDragonID
     | ClearSession;
 

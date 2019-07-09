@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/_state/initial';
 import { selectLocateDungeon } from 'src/app/_state/general/general.selectors';
-import { LocateDungeon } from 'src/app/_state/general/general.actions';
+import { LocateDungeon, ClearSession } from 'src/app/_state/general/general.actions';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +28,8 @@ export class HeaderComponent implements OnInit {
     this._route.navigate(['./dungeon/dragon-shouts']);
   }
 
-  logout(){
+  logout() {
+    this._store.dispatch(new ClearSession());
     this._route.navigate(['./login']);
   }
 
